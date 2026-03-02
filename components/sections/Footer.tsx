@@ -6,7 +6,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "luc
 
 export const Footer = () => {
     return (
-        <footer className="pt-24 pb-12 bg-slate-950 text-white overflow-hidden relative">
+        <footer className="pt-24 pb-12 bg-slate-900 text-white overflow-hidden relative">
             <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-blue-500/50 to-transparent" />
 
 

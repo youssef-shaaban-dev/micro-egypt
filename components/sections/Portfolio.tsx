@@ -3,7 +3,7 @@
 import React from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { fadeIn, staggerContainer } from "@/lib/motion"
+import { fadeIn, staggerContainer, revealUp, scaleUp } from "@/lib/motion"
 import { ExternalLink } from "lucide-react"
 
 const projects = [
@@ -33,26 +33,35 @@ const projects = [
 
 export const Portfolio = () => {
     return (
-        <section id="portfolio" className="py-24 bg-background">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="text-left mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-primary font-bold mb-4 font-outfit"
-                    >
-                        Our Portfolio
-                    </motion.h2>
-                    <motion.h3
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-bold font-outfit"
-                    >
-                        Projects We Are Proud Of
-                    </motion.h3>
+        <section id="portfolio" className="py-32 bg-background relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="text-center mb-24">
+                    <div className="overflow-hidden mb-4">
+                        <motion.h2
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            variants={revealUp}
+                            className="text-primary font-bold font-outfit uppercase tracking-[0.3em] text-sm"
+                        >
+                            Our Portfolio
+                        </motion.h2>
+                    </div>
+
+                    <div className="overflow-hidden">
+                        <motion.h3
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            variants={revealUp}
+                            className="text-5xl md:text-8xl font-bold font-outfit leading-tight tracking-tighter"
+                        >
+                            Projects <span className="text-muted-foreground italic">of Distinction</span>
+                        </motion.h3>
+                    </div>
                 </div>
 
                 <motion.div
@@ -60,34 +69,41 @@ export const Portfolio = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-12"
                 >
                     {projects.map((project, idx) => (
                         <motion.div
                             key={idx}
-                            variants={fadeIn("up")}
-                            className="group relative overflow-hidden rounded-4xl bg-accent"
+                            variants={scaleUp}
+                            whileHover={{ y: -10 }}
+                            className="group relative overflow-hidden rounded-[3rem] bg-accent border border-border/50 shadow-2xl"
                         >
-                            <div className="aspect-4/5 overflow-hidden">
+                            <div className="aspect-3/4 overflow-hidden">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     width={500}
                                     height={600}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                 />
                             </div>
-                            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10 text-left">
+                            <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 flex flex-col justify-end p-10 text-left backdrop-blur-[2px]">
 
-                                <div className="text-blue-400 font-bold mb-2 font-outfit">{project.category}</div>
-                                <h4 className="text-white text-3xl font-bold mb-4 font-outfit">{project.title}</h4>
-                                <div className="flex items-center justify-start gap-6">
-                                    <span className="text-white/60 font-outfit">{project.year}</span>
+                                <motion.div
+                                    initial={{ y: 20, opacity: 0 }}
+                                    whileInView={{ y: 0, opacity: 1 }}
+                                    className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                                >
+                                    <div className="text-primary font-bold mb-3 font-outfit uppercase tracking-widest text-sm">{project.category}</div>
+                                    <h4 className="text-white text-4xl font-bold mb-6 font-outfit leading-tight">{project.title}</h4>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-white/60 font-outfit text-lg">{project.year}</span>
 
-                                    <button className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-black hover:bg-primary hover:text-white transition-colors">
-                                        <ExternalLink size={20} />
-                                    </button>
-                                </div>
+                                        <button className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-black hover:bg-primary hover:text-white transition-all duration-500 shadow-xl group/btn">
+                                            <ExternalLink size={24} className="group-hover/btn:rotate-45 transition-transform" />
+                                        </button>
+                                    </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     ))}

@@ -2,8 +2,8 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { fadeIn, staggerContainer } from "@/lib/motion"
 import { Smartphone, Laptop, Globe, Server, Palette, Rocket } from "lucide-react"
+import { staggerContainer, revealUp, scaleUp } from "@/lib/motion"
 
 const services = [
     {
@@ -46,27 +46,36 @@ const services = [
 
 export const Services = () => {
     return (
-        <section id="services" className="py-24 relative">
+        <section id="services" className="py-32 relative">
             <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-20">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-primary font-bold mb-4 font-outfit"
-                    >
-                        Our Services
-                    </motion.h2>
-                    <motion.h3
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-bold font-outfit"
-                    >
-                        Integrated Digital Solutions for Your Business Growth
-                    </motion.h3>
+                <div className="text-center mb-24">
+                    <div className="overflow-hidden mb-4">
+                        <motion.h2
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            variants={revealUp}
+                            className="text-primary font-bold font-outfit uppercase tracking-widest text-sm"
+                        >
+                            Our Expertise
+                        </motion.h2>
+                    </div>
+
+                    <div className="overflow-hidden">
+                        <motion.h3
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            variants={revealUp}
+                            className="text-4xl md:text-7xl font-bold font-outfit leading-tight"
+                        >
+                            High-impact digital solutions <br />
+                            <span className="text-muted-foreground italic">crafted with precision</span>
+                        </motion.h3>
+                    </div>
                 </div>
+
 
 
                 <motion.div
@@ -79,22 +88,24 @@ export const Services = () => {
                     {services.map((service, idx) => (
                         <motion.div
                             key={idx}
-                            variants={fadeIn("up", 0)}
-                            whileHover={{ y: -10 }}
-                            className="p-8 rounded-3xl bg-background border border-border hover:shadow-2xl hover:shadow-primary/5 transition-all group"
+                            variants={scaleUp}
+                            whileHover={{ y: -15, scale: 1.02 }}
+                            className="p-10 rounded-[2.5rem] bg-background border border-border hover:shadow-2xl hover:shadow-primary/10 transition-all group relative overflow-hidden"
                         >
-                            <div className={`w-14 h-14 rounded-2xl ${service.color} flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform`}>
-                                <service.icon size={28} />
-                            </div>
-                            <h4 className="text-xl font-bold mb-4 font-outfit">{service.title}</h4>
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
 
-                            <p className="text-muted-foreground leading-relaxed mb-6">
+                            <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center text-white mb-8 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
+                                <service.icon size={32} />
+                            </div>
+                            <h4 className="text-2xl font-bold mb-4 font-outfit">{service.title}</h4>
+                            <p className="text-muted-foreground leading-relaxed mb-8 text-lg font-sans">
                                 {service.desc}
                             </p>
-                            <div className="w-10 h-1 bg-primary/20 group-hover:w-full transition-all duration-500" />
+                            <div className="w-12 h-1 bg-primary/30 group-hover:w-full transition-all duration-700" />
                         </motion.div>
                     ))}
                 </motion.div>
+
             </div>
         </section>
     )

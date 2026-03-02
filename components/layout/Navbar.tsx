@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
+import { useHasMounted } from "@/hooks/use-has-mounted"
 
 const navLinks = [
     { name: "Home", href: "#home" },
@@ -20,10 +21,9 @@ export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
     const { theme, setTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
+    const hasMounted = useHasMounted()
 
     useEffect(() => {
-        setMounted(true)
         const handleScroll = () => {
             setScrolled(window.scrollY > 50)
         }
@@ -31,7 +31,7 @@ export const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    if (!mounted) return null
+    if (!hasMounted) return null
 
     return (
         <nav

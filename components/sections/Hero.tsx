@@ -3,7 +3,7 @@
 import React from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { fadeIn, staggerContainer } from "@/lib/motion"
+import { fadeIn, staggerContainer, revealUp, scaleUp } from "@/lib/motion"
 import { ArrowRight, Play } from "lucide-react"
 
 export const Hero = () => {
@@ -21,45 +21,52 @@ export const Hero = () => {
                     variants={staggerContainer(0.2, 0.1)}
                     initial="hidden"
                     animate="show"
-                    className="text-left lg:text-left"
+                    className="text-left max-w-4xl"
                 >
+                    <div className="overflow-hidden">
+                        <motion.div
+                            variants={fadeIn("up", 0.1)}
+                            className="inline-block px-4 py-1.5 mb-8 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold font-outfit"
+                        >
+                            Innovating the Digital Future
+                        </motion.div>
+                    </div>
+
+                    <div className="overflow-hidden mb-6">
+                        <motion.h1
+                            variants={revealUp}
+                            className="text-6xl md:text-8xl font-bold font-outfit leading-[1.05]"
+                        >
+                            Transform your ideas into <span className="text-primary italic">Reality</span>
+                        </motion.h1>
+                    </div>
+
+                    <div className="overflow-hidden mb-12">
+                        <motion.p
+                            variants={fadeIn("up", 0.3)}
+                            className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-2xl font-sans"
+                        >
+                            At Micro Egypt, we provide integrated technical solutions including web design, mobile applications, and business management systems with the highest global quality standards.
+                        </motion.p>
+                    </div>
+
                     <motion.div
-                        variants={fadeIn("up", 0.1)}
-                        className="inline-block px-4 py-1.5 mb-6 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold font-outfit"
+                        variants={fadeIn("up", 0.5)}
+                        className="flex flex-wrap gap-6"
                     >
-                        Innovating the Digital Future
-                    </motion.div>
-
-                    <motion.h1
-                        variants={fadeIn("up", 0.2)}
-                        className="text-5xl md:text-7xl font-bold font-outfit leading-[1.1] mb-6"
-                    >
-                        Transform your ideas into <span className="text-primary">Reality</span>
-                    </motion.h1>
-
-                    <motion.p
-                        variants={fadeIn("up", 0.3)}
-                        className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-xl font-sans"
-                    >
-                        At Micro Egypt, we provide integrated technical solutions including web design, mobile applications, and business management systems with the highest global quality standards.
-                    </motion.p>
-
-                    <motion.div
-                        variants={fadeIn("up", 0.4)}
-                        className="flex flex-wrap gap-4"
-                    >
-                        <button className="group bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform font-outfit">
+                        <button className="group bg-primary text-primary-foreground px-10 py-5 rounded-full font-bold flex items-center gap-3 hover:scale-105 transition-all shadow-xl shadow-primary/20 font-outfit text-lg">
                             Get Started
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <button className="flex items-center gap-3 px-8 py-4 rounded-full font-bold border border-border hover:bg-accent transition-colors font-outfit">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                <Play className="w-4 h-4 fill-current" />
+                        <button className="flex items-center gap-4 px-10 py-5 rounded-full font-bold border border-border hover:bg-accent transition-all font-outfit text-lg group">
+                            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                <Play className="w-5 h-5 fill-current" />
                             </div>
                             View Our Work
                         </button>
                     </motion.div>
                 </motion.div>
+
 
 
                 <motion.div
@@ -81,20 +88,22 @@ export const Hero = () => {
 
                     {/* Floating Elements */}
                     <motion.div
+                        variants={scaleUp}
+                        transition={{ delay: 1 }}
                         animate={{ y: [0, -20, 0] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute -top-10 -left-10 bg-background/90 p-6 rounded-2xl shadow-xl border border-border backdrop-blur-md"
+                        className="absolute -top-10 -left-10 bg-background/90 p-8 rounded-3xl shadow-2xl border border-border backdrop-blur-xl z-20"
                     >
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-500 font-bold text-xl font-outfit">
+                        <div className="flex items-center gap-5">
+                            <div className="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center text-green-500 font-bold text-2xl font-outfit">
                                 99%
                             </div>
                             <div>
-                                <div className="text-sm font-bold font-outfit">Success Rate</div>
-                                <div className="text-xs text-muted-foreground">In project delivery</div>
+                                <div className="text-base font-bold font-outfit">Success Rate</div>
+                                <div className="text-xs text-muted-foreground uppercase tracking-widest font-outfit">In delivery</div>
                             </div>
                         </div>
                     </motion.div>
+
 
                 </motion.div>
             </div>

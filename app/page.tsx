@@ -8,6 +8,7 @@ import { About } from "@/components/sections/About"
 import { Services } from "@/components/sections/Services"
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs"
 import { Portfolio } from "@/components/sections/Portfolio"
+import { Contact } from "@/components/sections/Contact"
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true)
@@ -28,6 +29,7 @@ export default function Home() {
             <Services />
             <WhyChooseUs />
             <Portfolio />
+            <Contact />
           </>
         )}
       </div>
